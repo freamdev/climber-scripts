@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
+using UnityEngine;
 
 [Serializable]
 public enum StatType
 {
-    Strength, Vitality
+    Health, Damage, AttackSpeed, AttackRange
 }
 
 [Serializable]
@@ -14,6 +15,8 @@ public class CharacterStat
 {
     public StatType Type;
     public float BaseValue;
+    [HideInInspector]
+    public float CurrentValue;
 
     public virtual float Value
     {
@@ -42,6 +45,7 @@ public class CharacterStat
     {
         statModifiers = new List<StatModifier>();
         StatModifiers = statModifiers.AsReadOnly();
+        CurrentValue = BaseValue;
     }
 
     public CharacterStat(float baseValue)
